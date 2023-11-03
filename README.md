@@ -2,7 +2,7 @@
 
 ## Getting started
 
-`$ npm install react-native-smtp-mailer --save`
+`$ npm install react-native-smtp-mail --save`
 
 *If you use RN version less than 0.60, then you need to link the native modules, either automatically or manually*
 <details>
