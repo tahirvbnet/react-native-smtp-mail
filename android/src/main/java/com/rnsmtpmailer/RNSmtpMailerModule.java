@@ -61,6 +61,7 @@ public class RNSmtpMailerModule extends ReactContextBaseJavaModule {
             String body = obj.getString("htmlBody");
 
             String fromName = obj.hasKey("fromName") ? obj.getString("fromName") : username;
+            String fromEmail = obj.getString("fromEmail");
             String replyToAddress = obj.hasKey("replyTo") ? obj.getString("replyTo") : username;
             ReadableArray bcc = obj.hasKey("bcc") ? obj.getArray("bcc") : null;
             Boolean ssl = obj.hasKey("ssl") ? obj.getBoolean("ssl") : true;
@@ -71,7 +72,7 @@ public class RNSmtpMailerModule extends ReactContextBaseJavaModule {
             public void run() {
                 try {
                     MailSender sender = new MailSender(username, password, mailhost, port, ssl);
-                    sender.sendMail(subject, body, username, fromName, replyToAddress, recipients, bcc, attachmentPaths, attachmentNames);
+                    sender.sendMail(subject, body, username, fromEmail, fromName, replyToAddress, recipients, bcc, attachmentPaths, attachmentNames);
 
                     WritableMap success = new WritableNativeMap();
                     success.putString("status", "SUCCESS");
@@ -124,16 +125,16 @@ class MailSender extends javax.mail.Authenticator {
         return new PasswordAuthentication(user, password);
     }
 
-    public synchronized void sendMail(String subject, String body, String sender, String senderAlias, String replyToAddress, String recipients, ReadableArray bcc,
+    public synchronized void sendMail(String subject, String body, String sender, String fromEmail, String senderAlias, String replyToAddress, String recipients, ReadableArray bcc,
           ReadableArray attachmentPaths, ReadableArray attachmentNames) throws Exception {
         MimeMessage message = new MimeMessage(session);
         Transport transport = session.getTransport();
         BodyPart messageBodyPart = new MimeBodyPart();
 
         if (!sender.equals(senderAlias)) {
-            message.setFrom(new InternetAddress(sender, senderAlias));
+            message.setFrom(new InternetAddress(fromEmail, senderAlias));
         } else {
-            message.setFrom(new InternetAddress(sender, ""));
+            message.setFrom(new InternetAddress(fromEmail, ""));
         }
 
         message.setReplyTo(InternetAddress.parse(replyToAddress));

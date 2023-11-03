@@ -19,7 +19,7 @@ export default class App extends Component {
       ssl: true, //if ssl: false, TLS is enabled,**note:** in iOS TLS/SSL is determined automatically, so either true or false is the same
       username: "username",
       password: "password",
-      from: "fromEmail",
+      fromEmail: "fromEmail",
       recipients: "toEmail1,toEmail2",
       subject: "subject",
       htmlBody: "<h1>header</h1><p>body</p>",
