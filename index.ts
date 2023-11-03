@@ -50,6 +50,10 @@ export interface SmtpOptions {
      */
     fromName?: string;
 
+    
+    // From email address shown to the receiver
+    fromEmail: string;
+
     /**
      * If not specified, the reply-to email is the username one
      * i.e: "fooReply@foobar.com"

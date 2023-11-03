@@ -21,10 +21,11 @@ RCT_EXPORT_METHOD(sendMail:(NSDictionary *)obj resolver:(RCTPromiseResolveBlock)
     NSString *body = [RCTConvert NSString:obj[@"htmlBody"]];
     
     NSString *fromName = [RCTConvert NSString:obj[@"fromName"]];
+    NSString *fromEmail = [RCTConvert NSString:obj[@"fromEmail"]];
     
     NSString *replyToAddress = [RCTConvert NSString:obj[@"replyTo"]];
     if (replyToAddress == nil) {
-        replyToAddress = username;
+        replyToAddress = fromEmail;
     }
     
     NSArray *bcc = [RCTConvert NSArray:obj[@"bcc"]];
@@ -43,7 +44,8 @@ RCT_EXPORT_METHOD(sendMail:(NSDictionary *)obj resolver:(RCTPromiseResolveBlock)
     MCOMessageBuilder *builder = [[MCOMessageBuilder alloc] init];
     
     MCOAddress *from = [MCOAddress addressWithDisplayName:fromName
-                                                mailbox:username];
+                                                mailbox:fromEmail];
+                                        
                                                 
     MCOAddress *to = [MCOAddress addressWithDisplayName:nil
                                               mailbox:recipients];
