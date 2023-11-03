@@ -46,7 +46,7 @@ pod install
    ```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
    ```
-     implementation project(':react-native-smtp-mailer')
+     implementation project(':react-native-smtp-mail')
    ```
 </details>
 
