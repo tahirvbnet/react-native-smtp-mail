@@ -130,6 +130,7 @@ class MailSender extends javax.mail.Authenticator {
         MimeMessage message = new MimeMessage(session);
         Transport transport = session.getTransport();
         BodyPart messageBodyPart = new MimeBodyPart();
+        
 
         if (!sender.equals(senderAlias)) {
             message.setFrom(new InternetAddress(fromEmail, senderAlias));
