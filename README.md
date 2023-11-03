@@ -75,6 +75,7 @@ RNSmtpMailer.sendMail({
   ssl: true, // optional. if false, then TLS is enabled. Its true by default in android. In iOS TLS/SSL is determined automatically, and this field doesn't affect anything
   username: "usernameEmail",
   password: "password",
+  fromEmail: "From Email e.g: youremail@gmail.com",
   fromName: "Some Name", // optional
   replyTo: "usernameEmail", // optional
   recipients: "toEmail1,toEmail2",
